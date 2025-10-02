@@ -1,8 +1,15 @@
-import React from "react";
+import React,{useState} from "react";
 import logo from "../assets/logo.svg";
 import "../css/NavBar.css";
 
 const Navbar = () => {
+    const[menuActivate,setMenuActivate]=useState(false);
+    const [showLogin, setShowLogin] = useState(true);
+    
+    const toggleMenu=()=>{
+        setMenuActivate(!menuActivate);
+    }
+
   return (
     <header id="BarraDeNavegacion">
       <nav id="Navegador">
@@ -14,11 +21,15 @@ const Navbar = () => {
           <h1 className="Content">Hermanos Jota</h1>
         </div>
 
-        <button className="MenuToggle" aria-label="Abrir menú">
+        <button
+          className="MenuToggle"
+          onClick={toggleMenu}
+          aria-label="Abrir menú"
+        >
           ☰
         </button>
 
-        <ul className="ListaNav">
+        <ul className={`ListaNav ${menuActivate ? "active" : ""}`}>
           <li className="Links">
             <a href="/">
               <button>Home</button>
@@ -34,16 +45,13 @@ const Navbar = () => {
               <button>Contacto</button>
             </a>
           </li>
+
           <li className="Links">
-            <a href="/">
-              <button>Login</button>
-            </a>
+            <button onClick={() => setShowLogin(!showLogin)}>
+              {showLogin ? "Registro" : "Login"}
+            </button>
           </li>
-          <li className="Links">
-            <a href="/">
-              <button>Registro</button>
-            </a>
-          </li>
+
           <li className="Links carrito">
             <a href="/">
               <button>
