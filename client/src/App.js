@@ -1,10 +1,15 @@
 import './App.css';
-
+import NavBar from './components/NavBar' ;
+import Footer from "./components/Footer";
 function App() {
   return (
-    <div className="App">
-      <h1>Muebleria Hermanos Jota</h1>
-    </div>
+    <>
+      <NavBar />
+      <div className="App">
+        <h1>Muebleria Hermanos Jota</h1>
+      </div>
+      <Footer />
+    </>
   );
 }
 
