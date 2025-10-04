@@ -1,20 +1,17 @@
 {
-  "dependencies": {
-    "express": "^5.1.0"
-  },
-  "name": "muebleria-jota",
-  "description": "Sitio web realizado para el segundo sprint del curso Desarrollo Web Fullstack 2025 a cargo del ITBA",
+  "name": "muebleria-hermanos-jota-react-express",
   "version": "1.0.0",
+  "description": "Sitio web realizado para el segundo sprint del curso Desarrollo Web Fullstack 2025 a cargo del ITBA",
   "main": "index.js",
-  "devDependencies": {
-    "concurrently": "^9.2.1"
-  },
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && npm run dev",
-    "client": "cd client && npm run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "npm run dev --prefix server",
+    "client": "npm start --prefix client"
   },
+  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
 }
