@@ -1,0 +1,201 @@
+h1 {
+    color: #673118;
+    text-align: left;
+    font-family: "Playfair Display", Georgia, serif;
+    letter-spacing: 0.5em;
+    font-size: 2rem;
+    font-weight: 700;
+    text-wrap: balance;
+    /* margin-bottom: 1rem;*/
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* imagen | info */
+    grid-template-rows: auto 1fr auto; /* nombre/desc | tabla | acciones */
+    gap: 2rem;
+    align-items: start; /* alinea la imagen y el texto en la parte superior */
+    max-width: 1100px;
+    margin: 1rem auto;
+
+    border-radius: 16px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+}
+
+.media {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.media img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+#descripcionProducto {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #4f4f4f;
+}
+.infoProducto {
+    background: #fffdfb;
+    padding: 2rem;
+    border-radius: 12px;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.fichaTecnica {
+    border: 2px solid #e0d6cc;
+    border-radius: 12px;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.fichaTecnica th {
+    border: none;
+    background: #f1e3d3;
+    text-transform: uppercase;
+    color: #5a3620;
+    text-align: left;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+}
+.fichaTecnica td {
+    border: none;
+    background: #e5e0e0;
+    padding: 0.6rem 1rem;
+    font-weight: semibold;
+}
+.fichaTecnica tr {
+    border-bottom: 1px solid #e0d6cc; /* línea divisoria sutil */
+}
+
+.acciones {
+    grid-column: 2;
+    grid-row: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.precio {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+#btnAdd {
+    padding: 0.6rem 1.2rem;
+    background: #7b4f2b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#btnAdd:hover {
+    background: #5a3620;
+}
+
+#modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 7px;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+#modal-message {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr !important;
+        grid-auto-rows: auto;
+        max-width: 680px;
+        padding: 1.25rem;
+        gap: 1.5rem;
+    }
+
+    /* Reordenar: imagen → info → botón */
+    .media,
+    .infoProducto,
+    .acciones {
+        grid-column: 1 / -1;
+    }
+
+    .media {
+        grid-row: 1;
+        max-width: 520px;
+        margin: 0 auto 1rem;
+        padding: 12px;
+    }
+
+    .infoProducto {
+        grid-row: 2;
+    }
+    .acciones {
+        grid-row: 3;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 0;
+    }
+
+    #btnAdd {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+        letter-spacing: 0.02em;
+    }
+
+    #descripcionProducto {
+        font-size: 0.95rem;
+    }
+
+    .fichaTecnica th {
+        width: 130px;
+    }
+}
