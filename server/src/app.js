@@ -10,15 +10,15 @@ const PORT = process.env.PORT ?? 3000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// Rutas
 app.use('/api/productos', productsRouter);
 
-// 404 handler
+// 404  error
 app.use((req, res) => {
   res.status(404).json({ message: 'Recurso no encontrado' });
 });
 
-// Error handler
+// Manejo de errores
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ message: 'Error interno del servidor' });
