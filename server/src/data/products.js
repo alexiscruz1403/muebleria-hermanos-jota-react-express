@@ -1,4 +1,4 @@
-export const products = [ // Datos a exportar armar bien con anterior base
+export const products = [ //ES DE PRUEBA Datos a exportar armar bien con anterior base o reemplazar
   {
     id: 1,
     nombre: 'Silla de madera',
