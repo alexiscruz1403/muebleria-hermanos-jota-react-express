@@ -2,8 +2,6 @@ import React from "react";
 import '../css/global.css';
 import '../css/componentes.css';
 import '../css/index.css';
-//
-import Productos from "../utils/ProductosList";
 
 function App() {
   return (
