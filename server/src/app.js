@@ -5,7 +5,7 @@ import { logger } from './middlewares/logger.js';
 import productsRouter from './routes/products.routes.js';
 
 const app = express();
-const PORT = process.env.PORT ?? 3000;
+const PORT = 4000;
 
 app.use(cors());
 app.use(express.json());
