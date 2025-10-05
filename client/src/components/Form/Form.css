@@ -1,3 +1,4 @@
+
 .c-form{ display: grid; gap: 12px; }
 .c-success{
     margin-top: 10px; padding: 12px 14px;
@@ -5,11 +6,46 @@
     background: rgba(217,119,6,.1);
     border: 1px solid rgba(217,119,6,.35);
     color: #6b3b02;
-}.c-btn{
+}
+.c-btn {
+  appearance: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 15em;
+  border: 2px solid transparent;
+  font-weight: 700;
+  font-size: 16px;
+  background: var(--c-accent, #f5e6d3);
+  color: var(--c-accent-contrast, #a0522c);
+  transition: all 0.15s ease-in-out;
+  box-shadow: none;
+}
+
+.c-btn:hover {
+  color: #080818;
+  filter: brightness(1.05);
+}
+
+.c-btn:active {
+  background-color: #a0522c;
+  color: #fbfaff;
+  transform: translateY(2px);
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.c-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.35);
+}
+.c-btn--primary {
+  background: var(--c-accent, #f5e6d3);
+  color: var(--c-accent-contrast, #a0522c);
+}
+/*.c-btn{
     appearance: none; cursor: pointer;
     padding: 12px 16px; border-radius: 12px;
     border: 2px solid transparent; font-weight: 700;
 }
 .c-btn--primary{ background: var(--c-accent); color: var(--c-accent-contrast); }
 .c-btn--primary:hover{ filter: brightness(1.05); }
-.c-btn:focus{ outline: none; box-shadow: 0 0 0 3px rgba(217,119,6,.35); }
+.c-btn:focus{ outline: none; box-shadow: 0 0 0 3px rgba(217,119,6,.35); }*/

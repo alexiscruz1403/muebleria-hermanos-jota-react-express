@@ -5,13 +5,14 @@ import { getProduct } from "../services/getProduct";
 export const ProductDetail = ({ productId, onAddToCart }) => {
     const [product, setProduct] = useState(null);
 
-    const fetchProduct = async () => {
+    useEffect(() => {
+        const fetchProduct = async () => {
         const data = await getProduct(productId);
         setProduct(data);
-    };
-
-    useEffect(() => {
+        };
+        
         fetchProduct();
+    
     }, [productId]);
 
     if (!product) return <div><h1>Product no encontrado</h1></div>;
