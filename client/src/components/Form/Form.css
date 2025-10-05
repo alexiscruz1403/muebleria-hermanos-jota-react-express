@@ -1,0 +1,15 @@
+.c-form{ display: grid; gap: 12px; }
+.c-success{
+    margin-top: 10px; padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(217,119,6,.1);
+    border: 1px solid rgba(217,119,6,.35);
+    color: #6b3b02;
+}.c-btn{
+    appearance: none; cursor: pointer;
+    padding: 12px 16px; border-radius: 12px;
+    border: 2px solid transparent; font-weight: 700;
+}
+.c-btn--primary{ background: var(--c-accent); color: var(--c-accent-contrast); }
+.c-btn--primary:hover{ filter: brightness(1.05); }
+.c-btn:focus{ outline: none; box-shadow: 0 0 0 3px rgba(217,119,6,.35); }

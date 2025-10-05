@@ -1,0 +1,22 @@
+#contacto-page{ background: var(--c-bg); color: var(--c-text); }
+
+.c-wrap{
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 24px 16px;
+}
+
+.c-card{
+    width: min(920px, 92vw);
+    background: var(--c-card);
+    border: 1px solid var(--c-border);
+    border-radius: var(--c-radius);
+    box-shadow: var(--c-shadow);
+    padding: 20px;
+}
+
+/* Responsive */
+@media (max-height: 700px){
+    #contacto-page main.c-wrap{ place-items: start center; }
+}

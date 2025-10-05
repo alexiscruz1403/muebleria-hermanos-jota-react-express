@@ -1,0 +1,32 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item img{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.item h4, .item p {
+    margin: 0;
+}
+
+.remove-item {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    align-self: start;
+}
+
+@media (min-width: 768px) {
+    .item img {
+        width: 150px;
+        height: auto;
+    }
+}

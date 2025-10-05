@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
-import { ProductDetailCard } from "../components/ProductDetailCard";
+import { ProductDetailCard } from "../components/ProductDetailCard/ProductDetailCard";
+import { getProduct } from "../services/getProduct";
 
-export const ProductDetail = ({ productId }) => {
+export const ProductDetail = ({ productId, onAddToCart }) => {
     const [product, setProduct] = useState(null);
 
-    useEffect(() => {
-        const fetchProduct = async () => {
-            const response = await fetch(`http://localhost:4000/api/productos/${productId}`);
-            const data = await response.json();
-            setProduct(data);
-        };
+    const fetchProduct = async () => {
+        const data = await getProduct(productId);
+        setProduct(data);
+    };
 
+    useEffect(() => {
         fetchProduct();
     }, [productId]);
 
-    if (!product) return <div>Cargando...</div>;
+    if (!product) return <div><h1>Product no encontrado</h1></div>;
 
     return (
         <div>
-            <ProductDetailCard product={product} />
+            <ProductDetailCard product={product} onAddToCart={onAddToCart} />
         </div>
     );
 };

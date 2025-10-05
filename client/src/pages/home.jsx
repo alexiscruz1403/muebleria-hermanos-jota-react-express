@@ -1,13 +1,27 @@
-import React from "react";
-import '../css/global.css';
-import '../css/componentes.css';
-import '../css/index.css';
-//
-import Productos from "../utils/ProductosList";
+import "../css/Home.css";
+import { useState, useEffect } from "react";
+import { Header } from "../components/Header/Header";
+import { ProductList } from "../components/ProductList/ProductList";
+import { getDestacados } from "../services/getDestacados";
 
-function App() {
+function Home({ navigate }) {
+  const [destacados, setDestacados] = useState([]);
+
+  const fetchDestacados = async () => {
+    try{
+      const data = await getDestacados();
+      setDestacados(data);
+    }catch(error){
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDestacados();
+  }, []);
+
   return (
-      <main>
+    <div className="homeContainer">
         <div className="contenedor-i">
           <div className="wrap-i">
             <div className="box-i">
@@ -19,21 +33,22 @@ function App() {
                 vez.
               </p>
               <div className="botones-i">
-                <a href="/contacto" className="btn1">
+                <button onClick={() => navigate("contact")} className="btn1">
                   Contacto
-                </a>
-                <a href="/productos" className="btn2">
+                </button>
+                <button onClick={() => navigate("products")} className="btn2">
                   Productos
-                </a>
+                </button>
               </div>
             </div>
           </div>
         </div>
-
-        <div id="destacados"></div>
-        <div id="gridDestacados"></div>
-      </main>
+        <div className="destacados">
+          <Header title="Productos Destacados"/>
+          <ProductList products={destacados} />
+        </div>
+    </div>
   );
 }
 
-export default App;
+export default Home;

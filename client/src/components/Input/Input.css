@@ -1,0 +1,13 @@
+.c-field{ display: grid; gap: 6px; }
+.c-field label{ font-weight: 600; }
+.c-field input[type="text"],
+.c-field input[type="email"],
+.c-field textarea{
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font: inherit; color: inherit;
+}
+.c-field textarea{ min-height: 130px; resize: vertical; }
+.c-error{ color: #d9534f; font-size: .92rem; }

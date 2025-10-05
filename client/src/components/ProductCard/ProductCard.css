@@ -1,0 +1,102 @@
+.card {
+    background-color: white;
+    width: 100%;
+    border-radius: 15px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card.loading {
+    background-color: #E0E0E0;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.loading-image{
+    width: 100%;
+    height: 150px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: #D6D6D6;
+}
+
+.card h2{
+    font-size: 12pt;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: #A0522D;
+}
+
+.card p{
+    font-size: 11pt;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: #87A96B;
+}
+
+.card-content{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+}
+
+.card-content.loading h2{
+    background-color: #CCCCCC;
+    width: 150px;
+    height: 16px;
+    color: transparent;
+}
+
+.card-content.loading p{
+    background-color: #CCCCCC;
+    width: 80px;
+    height: 16px;
+    color: transparent;
+}
+
+.detail-link {
+    background-color: #A0522D;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 15px;
+    display: block;
+    transition: background-color 0.3s;
+    border: none;
+}
+
+.detail-link.loading{
+    background-color: #CCCCCC;
+    color: transparent;
+    cursor: default;
+    pointer-events: none;
+    border: none;
+}
+
+.detail-link:hover {
+    background-color: #DA9575;
+}
+
+.detail-link:hover.loading {
+    background-color: #CCCCCC;
+}
