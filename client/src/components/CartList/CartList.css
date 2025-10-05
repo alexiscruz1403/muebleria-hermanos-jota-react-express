@@ -1,0 +1,17 @@
+#carrito-items {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    #carrito-items {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    #carrito-items {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
