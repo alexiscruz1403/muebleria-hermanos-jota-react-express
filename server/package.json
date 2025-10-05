@@ -1,11 +1,20 @@
 {
+  "name": "muebleria-server",
+  "version": "1.0.0",
   "type": "module",
+  "main": "api/index.js",
+  "engines": {
+    "node": ">=18.x"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0"
   },
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "start": "node api/index.js",
+    "build": "echo 'No build step required for serverless functions'",
+    "vercel-build": "echo 'No build step required for serverless functions'"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
