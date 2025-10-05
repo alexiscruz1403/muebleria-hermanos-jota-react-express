@@ -2,7 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import NavBar from './components/Navbar/NavBar' ;
 import Footer from "./components/Footer/Footer";
-import Home from './pages/Home';
+import Home from './pages/home';
 import { Products } from './pages/Products';
 import { ProductDetail } from './pages/ProductDetail';
 import { Cart } from './pages/Cart';
