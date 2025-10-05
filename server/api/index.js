@@ -33,5 +33,5 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: "Error interno del servidor" });
 });
 
-// Export the Express API
+// Export the Express API for Vercel
 export default app;
