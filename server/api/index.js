@@ -7,9 +7,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production' 
-        ? ['https://muebleria-hermanos-jota-react-expre.vercel.app']
-        : ['http://localhost:3000']
+    origin: ['http://localhost:3000', 'https://muebleria-hermanos-jota-react-expre.vercel.app']
 }));
 app.use(express.json());
 app.use(logger);
