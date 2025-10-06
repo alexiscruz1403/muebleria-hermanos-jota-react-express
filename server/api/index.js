@@ -8,22 +8,22 @@ const app = express();
 // Middleware
 app.use(cors({
     origin: process.env.NODE_ENV === 'production' 
-        ? ['https://muebleria-hermanos-jota-react-expre.vercel.app'] // Reemplaza con tu dominio frontend
+        ? ['https://muebleria-hermanos-jota-react-expre.vercel.app']
         : ['http://localhost:3000']
 }));
 app.use(express.json());
 app.use(logger);
 
-// API routes
-app.use("/api/productos", productsRouter);
-
-// Health check
+// Health check - debe ir antes que las rutas de productos
 app.get("/api", (req, res) => {
     res.json({ message: "API funcionando correctamente" });
 });
 
-// Manejo de errores 404
-app.use("/api/*", (req, res) => {
+// API routes
+app.use("/api/productos", productsRouter);
+
+// Manejo de errores 404 - usar un patrón válido
+app.use("/api/:path(*)", (req, res) => {
     res.status(404).json({ message: "Endpoint no encontrado" });
 });
 
