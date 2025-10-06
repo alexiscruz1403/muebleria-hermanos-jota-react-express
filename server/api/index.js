@@ -22,9 +22,12 @@ app.get("/api", (req, res) => {
 // API routes
 app.use("/api/productos", productsRouter);
 
-// Manejo de errores 404 - usar un patrón válido
-app.use("/api/:path(*)", (req, res) => {
-    res.status(404).json({ message: "Endpoint no encontrado" });
+// Manejo de errores 404
+app.use((req, res) => {
+    if (req.path.startsWith("/api")) {
+        return res.status(404).json({ message: "Endpoint no encontrado" });
+    }
+    res.status(404).send("Not found");
 });
 
 // Manejo de errores 500
