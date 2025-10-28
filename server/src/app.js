@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import mongoose from "mongoose";
 import { logger } from "./middlewares/logger.js";
 import productsRouter from "./routes/products.routes.js";
 import path from "path";
@@ -9,7 +10,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
+const DB_URI ="mongodb+srv://javier:muebleria2025@cluster0.um4caoa.mongodb.net/?appName=Cluster0";
+
+// Conexión a MongoDB
+mongoose.connect(DB_URI)
+  .then(() => console.log("Conexión exitosa a MongoDB"))
+  .catch((err) => console.error("Error al conectar a MongoDB:", err));
 
 app.use(cors());
 app.use(express.json());
