@@ -1,29 +1,47 @@
-import { products } from '../data/products.js';
+import { Product } from "../models/ProductsModel.js";
 
-export const getProducts = (req, res) => {
-  const search = req.query.search;
-  if (search) {
-    const filteredProducts = products.filter(product =>
-      product.nombre.toLowerCase().includes(search.toLowerCase()) ||
-      product.descripcion.toLowerCase().includes(search.toLowerCase())
-    );
-    return res.json(filteredProducts);
+export const getProducts = async (req, res) => {
+  try {
+    const search = req.query.search;
+    let products;
+
+    if (search) {
+      products = await Product.find({
+        $or: [
+          { nombre: { $regex: search, $options: "i" } },
+          { descripcion: { $regex: search, $options: "i" } },
+        ],
+      });
+    } else {
+      products = await Product.find();
+    }
+
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener productos", error });
   }
-  res.json(products);
 };
 
-export const getDestacados = (req, res) => {
-  const destacadoProducts = products.slice(0, 5);
-  res.json(destacadoProducts);
+export const getDestacados = async (req, res) => {
+  try {
+    const destacadoProducts = await Product.find().limit(5);
+    res.json(destacadoProducts);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener destacados", error });
+  }
 };
 
-export const getProductById = (req, res) => {
-  const id = Number(req.params.id);
-  const product = products.find((item) => item.id === id);
+export const getProductById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const product = await Product.findById(id);
 
-  if (!product) {
-    return res.status(404).json({ message: 'Producto no encontrado' });
+    if (!product) {
+      return res.status(404).json({ message: "Producto no encontrado" });
+    }
+
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ message: "Error al buscar producto", error });
   }
-
-  res.json(product);
 };
