@@ -11,12 +11,44 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const DB_URI ="mongodb+srv://javier:muebleria2025@cluster0.um4caoa.mongodb.net/?appName=Cluster0";
+const DB_URI =
+  "mongodb+srv://javier:muebleria2025@cluster0.um4caoa.mongodb.net/MuebleriaJota?retryWrites=true&w=majority";
 
 // Conexión a MongoDB
-mongoose.connect(DB_URI)
-  .then(() => console.log("Conexión exitosa a MongoDB"))
-  .catch((err) => console.error("Error al conectar a MongoDB:", err));
+mongoose
+  .connect(DB_URI)
+  .then(() => {
+   console.log("Conexión exitosa a MongoDB");
+
+   const db = mongoose.connection.db;
+   console.log("Base de datos actual:", db.databaseName);
+
+   db.listCollections()
+     .toArray()
+     .then((collections) => {
+       console.log(
+         "Colecciones disponibles:",
+         collections.map((c) => c.name)
+       );
+
+       if (collections.some((c) => c.name === "products")) {
+         db.collection("products")
+           .find()
+           .toArray()
+           .then((products) => {
+             console.log("Productos en la colección 'products':", products);
+           })
+           .catch((err) => console.error("Error al obtener productos:", err));
+       } else {
+         console.log(
+           "La colección 'products' no existe en esta base de datos."
+         );
+       }
+     })
+     .catch((err) => console.error("Error al listar colecciones:", err));
+
+  })
+  .catch((err) => console.error("Error de conexión", err));
 
 app.use(cors());
 app.use(express.json());
