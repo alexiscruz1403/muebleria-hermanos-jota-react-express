@@ -1,0 +1,169 @@
+.product-form {
+    max-width: 550px;
+    padding: 20px 25px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", "Roboto", sans-serif;
+    color: #3c1d0b;
+}
+
+.product-form h3 {
+    color: #7a3b1e;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.product-image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-image img {
+    max-width: 300px;
+    height: 300px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Etiquetas y grupos */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-container {
+    margin-bottom: 20px;
+}
+
+.form-group .input-label, .form-group .input-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    color: #5b2d16;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group input,
+.form-group textarea {
+    padding: 10px 12px;
+    border: 1.5px solid #d8b999;
+    border-radius: 8px;
+    background-color: #fdf7f2;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #b46c3f;
+    box-shadow: 0 0 0 3px rgba(180, 108, 63, 0.2);
+    outline: none;
+}
+
+.form-group textarea,
+.form-group textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+/* Sección de especificaciones */
+.form-specs {
+    margin-top: 30px;
+}
+
+.specs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.specs-button{
+    background-color: #e9c5a2;
+    color: #5b2d16;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.form-specs .form-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+.form-specs .form-group input {
+    flex: 1;
+}
+
+.form-specs .form-group button {
+    background-color: #e9c5a2;
+    color: #5b2d16;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.form-specs .form-group button:hover, .specs-button:hover {
+    background-color: #d6a57b;
+    transform: scale(1.05);
+}
+
+/* Botones principales */
+.form-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-form button[type="submit"] {
+    background-color: #8b4b2a;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.product-form button[type="submit"]:hover {
+    background-color: #6b3219;
+    transform: translateY(-2px);
+}
+
+/* Mensajes de error */
+.error {
+    color: #b00020;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    .product-form {
+        padding: 30px 25px;
+    }
+
+    .form-specs .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-specs .form-group button {
+        align-self: flex-end;
+    }
+}

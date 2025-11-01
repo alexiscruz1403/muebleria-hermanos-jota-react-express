@@ -1,28 +1,24 @@
 import './App.css';
 import { useState } from 'react';
-import NavBar from './components/Navbar/NavBar' ;
-import Footer from "./components/Footer/Footer";
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Layout } from './components/Layout/Layout';
 import Home from './pages/home';
 import { Products } from './pages/Products';
 import { ProductDetail } from './pages/ProductDetail';
 import { Cart } from './pages/Cart';
 import { Contact } from './pages/Contact';
+import { CrearProducto } from './pages/CrearProducto';
+import { ActualizarProducto } from './pages/ActualizarProducto';
 
 function App() {
-  const [router, setRouter] = useState("home");
-  const [productId, setProductId] = useState(null);
+  const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState([]);
-
-  const routerHandler = (route, id = null) => {
-    setRouter(route);
-    setProductId(id);
-  }
 
   const addToCart = (product) => {
     if(!cartProducts.find(p => p.id === product.id)) {
       setCartProducts([...cartProducts, product]);
     }
-    setRouter("cart");
+    navigate('/cart');
   }
 
   const removeFromCart = (productId) => {
@@ -30,17 +26,17 @@ function App() {
   }
 
   return (
-    <div className='layout'>
-      <NavBar navigate={routerHandler} cartCount={cartProducts.length}/>
-      <main>
-        {router === "home" && <Home navigate={routerHandler} />}
-        {router === "products" && <Products navigate={routerHandler} />}
-        {router === "detail" && <ProductDetail productId={productId} onAddToCart={addToCart} />}
-        {router === "cart" && <Cart products={cartProducts} onRemove={removeFromCart}/>}
-        {router === "contact" && <Contact />}
-      </main>
-      <Footer />
-    </div>
+    <Layout cartCount={cartProducts.length}>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/products' element={<Products />} />
+        <Route path='/products/:id' element={<ProductDetail onAddToCart={addToCart} />} />
+        <Route path='/cart' element={<Cart products={cartProducts} onRemove={removeFromCart} />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/admin/crear-producto' element={<CrearProducto />} />
+        <Route path='/admin/actualizar-producto/:id' element={<ActualizarProducto />} />
+      </Routes>
+    </Layout>
   );
 }
 
