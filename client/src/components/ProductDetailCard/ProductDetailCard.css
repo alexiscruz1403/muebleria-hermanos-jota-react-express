@@ -111,6 +111,32 @@ h1 {
     background: #5a3620;
 }
 
+.actions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.edit-button, .delete-button{
+    padding: 0.6rem 1.2rem;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.edit-button{
+    background: #4a90e2;
+}
+
+.edit-button:hover, .delete-button:hover{
+    opacity: 0.9;
+}
+
+.delete-button{
+    background: #d9534f;
+}
+
 #modal {
     display: none;
     position: fixed;

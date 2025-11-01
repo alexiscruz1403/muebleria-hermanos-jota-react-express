@@ -5,60 +5,48 @@ import { logger } from "./middlewares/logger.js";
 import productsRouter from "./routes/products.routes.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import multer from "multer";
+import dotenv from "dotenv";
+
+dotenv.config(); // carga las variables del .env
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const DB_URI =
-  "mongodb+srv://javier:muebleria2025@cluster0.um4caoa.mongodb.net/MuebleriaJota?retryWrites=true&w=majority";
 
 // Conexión a MongoDB
-mongoose
-  .connect(DB_URI)
-  .then(() => {
-   console.log("Conexión exitosa a MongoDB");
-
-   const db = mongoose.connection.db;
-   console.log("Base de datos actual:", db.databaseName);
-
-   db.listCollections()
-     .toArray()
-     .then((collections) => {
-       console.log(
-         "Colecciones disponibles:",
-         collections.map((c) => c.name)
-       );
-
-       if (collections.some((c) => c.name === "products")) {
-         db.collection("products")
-           .find()
-           .toArray()
-           .then((products) => {
-             console.log("Productos en la colección 'products':", products);
-           })
-           .catch((err) => console.error("Error al obtener productos:", err));
-       } else {
-         console.log(
-           "La colección 'products' no existe en esta base de datos."
-         );
-       }
-     })
-     .catch((err) => console.error("Error al listar colecciones:", err));
-
-  })
-  .catch((err) => console.error("Error de conexión", err));
+await mongoose.connect(process.env.DB_URI)
+  .then(() => console.log("Conexión exitosa a MongoDB"))
+  .catch((err) => console.error("Error al conectar a MongoDB:", err));
+console.log("Base actual:", mongoose.connection.name);
 
 app.use(cors());
 app.use(express.json());
 app.use(logger);
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads"); // carpeta donde se guarda
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const ext = path.extname(file.originalname);
+    cb(null, file.fieldname + "-" + uniqueSuffix + ext);
+  },
+});
+
+const upload = multer({ storage });
 
 // API routes
 app.use("/api/productos", productsRouter);
 
 // Servir React build
 app.use(express.static(path.join(__dirname, "../../client/build")));
+
+// Servir imágenes estáticas
+app.use("/uploads", express.static("public/uploads"));
 
 // 
 app.use((req, res, next) => {

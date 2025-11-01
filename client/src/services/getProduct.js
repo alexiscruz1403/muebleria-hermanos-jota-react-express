@@ -1,4 +1,4 @@
-const API_URL = 'https://muebleria-hermanos-jota-react-expre-iota.vercel.app/api';
+const API_URL = "http://localhost:4000/api";
 
 export const getProduct = async (id) => {
     try{

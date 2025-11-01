@@ -1,0 +1,12 @@
+.admin-form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.admin-form-container h2 {
+    margin: 0;
+    margin-bottom: 30px;
+    color: #5b2d16;
+}

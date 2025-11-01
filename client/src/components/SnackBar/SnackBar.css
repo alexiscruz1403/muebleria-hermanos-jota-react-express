@@ -1,0 +1,26 @@
+/* Contenedor del snackbar */
+.snackbar {
+    min-width: 250px;
+    margin-left: -125px; /* para centrar horizontalmente */
+    background-color: #333; /* color por defecto, se puede sobrescribir */
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    font-size: 16px;
+    z-index: 1000;
+    opacity: 1;
+    bottom: 20px; /* sube un poco al aparecer */
+    transition: opacity 0.5s, bottom 0.5s;
+}
+/* Tipos de mensajes */
+.snackbar.success {
+    background-color: #4CAF50; /* verde */
+}
+
+.snackbar.error {
+    background-color: #F44336; /* rojo */
+}

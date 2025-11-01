@@ -1,38 +1,28 @@
 import "./ProductDetailCard.css";
+import { useNavigate } from "react-router-dom";
+import { deleteProduct } from "../../services/deleteProduct";
 
 export const ProductDetailCard = ({ product, onAddToCart }) => {
-    const labels = {
-        medidas: "Medidas",
-        materiales: "Materiales",
-        acabado: "Acabado",
-        peso: "Peso",
-        capacidad: "Capacidad",
-        modulares: "Modulares",
-        tapizado: "Tapizado",
-        confort: "Confort",
-        rotacion: "Rotación",
-        garantia: "Garantía",
-        cargaMaxima: "Carga máxima",
-        almacenamiento: "Almacenamiento",
-        caracteristicas: "Características",
-        colchon: "Colchon",
-        estructura: "Estructura",
-        relleno: "Relleno",
-        sostenibilidad: "Sostenibilidad",
-        extension: "Extension",
-        apilable: "Apilables",
-        incluye: "Incluye",
-        cable: "Cables",
-        regulacion: "Regulación",
-        certificacion: "Certificación",
-    };
+    const navigate = useNavigate();
+
+    const handleDelete = async () => {
+        const confirm = window.confirm("¿Estás seguro de que deseas eliminar este producto?");
+        if(confirm){
+            try{
+                await deleteProduct(product.id);
+                navigate('/products');
+            }catch(error){
+                console.error("Error deleting product:", error);
+            }
+        }
+    }
     
     return (
         <article>
             <div class="detail-container">    
             {/* <!-- Imagen del producto --> */}
             <figure class="media">
-                <img id="imagenProducto" src={`imgs/${product.img.src}`} alt={product.img.alt} />
+                <img id="imagenProducto" src={`http://localhost:4000${product.img.src}`} alt={product.img.alt} />
             </figure>
             {/* <!-- Información del producto --> */}
             <section class=" infoProducto">
@@ -44,12 +34,16 @@ export const ProductDetailCard = ({ product, onAddToCart }) => {
                     <tbody id="tablaDetalles">
                         {product.especificaciones && Object.entries(product.especificaciones).map(([key, value]) => (
                             <tr key={key}>
-                                <th>{labels[key] || key}</th>
+                                <th>{key.toUpperCase()}</th>
                                 <td>{value}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                <div className="actions">
+                    <button type="button" className="edit-button" onClick={() => {navigate(`/admin/actualizar-producto/${product.id}`)}}>Editar</button>
+                    <button type="button" className="delete-button" onClick={handleDelete}>Eliminar</button>
+                </div>
             </section>
             {/* <!-- Precio y boton --> */}
             <section class="acciones">
