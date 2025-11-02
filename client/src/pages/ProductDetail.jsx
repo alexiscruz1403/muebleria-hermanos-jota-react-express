@@ -1,25 +1,32 @@
-import { useState, useEffect } from "react";
+// client/src/pages/ProductDetail.jsx
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { ProductDetailCard } from "../components/ProductDetailCard/ProductDetailCard";
 import { getProduct } from "../services/getProduct";
 
-export const ProductDetail = ({ productId, onAddToCart }) => {
-    const [product, setProduct] = useState(null);
+export const ProductDetail = ({ onAddToCart }) => {
+  const { id } = useParams(); // 👈 importante: debe coincidir con la ruta "/products/:id"
+  const [product, setProduct] = useState(null);
 
-    useEffect(() => {
-        const fetchProduct = async () => {
-        const data = await getProduct(productId);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        if (!id) return; // evita fetch undefined
+        const data = await getProduct(id);
         setProduct(data);
-        };
-        
-        fetchProduct();
-    
-    }, [productId]);
+      } catch (error) {
+        console.error("Error al obtener producto:", error);
+      }
+    };
 
-    if (!product) return <div><h1>Product no encontrado</h1></div>;
+    fetchProduct();
+  }, [id]);
 
-    return (
-        <div>
-            <ProductDetailCard product={product} onAddToCart={onAddToCart} />
-        </div>
-    );
+  if (!product) return <h1>Producto no encontrado</h1>;
+
+  return (
+    <div>
+      <ProductDetailCard product={product} onAddToCart={onAddToCart} />
+    </div>
+  );
 };
