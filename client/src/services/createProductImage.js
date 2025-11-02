@@ -1,11 +1,11 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
+const API_URL = "https://muebleria-hermanos-jota-react-expre-iota.vercel.app/api";
 
 export const createProductImage = async (productId, imageFile) => {
     try{
         const formData = new FormData();
         formData.append("image", imageFile);
 
-        const response = await fetch(`${API_URL}/api/products/${productId}/image`, {
+        const response = await fetch(`${API_URL}/products/${productId}/image`, {
             method: "POST",
             body: formData,
         });

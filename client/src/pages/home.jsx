@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import { Header } from "../components/Header/Header";
 import { ProductList } from "../components/ProductList/ProductList";
 import { getDestacados } from "../services/getDestacados";
+import { useNavigate } from "react-router-dom";
 
-function Home({ navigate }) {
+function Home() {
   const [destacados, setDestacados] = useState([]);
+  const navigate = useNavigate();
 
   const fetchDestacados = async () => {
     try{
@@ -33,10 +35,10 @@ function Home({ navigate }) {
               vez.
             </p>
             <div className="botones-i">
-              <button onClick={() => navigate("contact")} className="btn1">
+              <button onClick={() => navigate("/contact")} className="btn1">
                 Contacto
               </button>
-              <button onClick={() => navigate("products")} className="btn2">
+              <button onClick={() => navigate("/products")} className="btn2">
                 Productos
               </button>
             </div>

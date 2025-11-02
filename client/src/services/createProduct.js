@@ -1,8 +1,8 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
+const API_URL = "https://muebleria-hermanos-jota-react-expre-iota.vercel.app/api";
 
 export const createProduct = async (productData) => {
     try{
-        const response = await fetch(`${API_URL}/api/products`, {
+        const response = await fetch(`${API_URL}/products`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
