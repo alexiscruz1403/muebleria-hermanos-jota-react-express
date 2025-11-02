@@ -7,7 +7,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://muebleria-hermanos-jota-react-expre.vercel.app']
+    origin: ['http://localhost:4000', 'https://muebleria-hermanos-jota-react-expre.vercel.app']
 }));
 app.use(express.json());
 app.use(logger);
@@ -18,7 +18,7 @@ app.get("/api", (req, res) => {
 });
 
 // API routes
-app.use("/api/productos", productsRouter);
+app.use("/api/products", productsRouter);
 
 // Manejo de errores 404
 app.use((req, res) => {

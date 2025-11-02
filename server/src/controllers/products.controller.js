@@ -43,15 +43,27 @@ export const getDestacados = async (req, res) => {
 };
 
 export const getProductById = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const product = await Product.findOne({ id: Number(req.params.id) });
+  const { id } = req.params;
 
-    if (!product) res.status(404).json({ message: "Producto no encontrado" });
+  try {
+    // 1) intento como _id de Mongo
+    let product = await Product.findById(id);
+
+    // 2) si no es un ObjectId válido o no encontró, intento por tu campo `id`
+    if (!product) {
+      product = await Product.findOne({ id: Number(id) });
+    }
+
+    if (!product) {
+      return res.status(404).json({ message: "Producto no encontrado" });
+    }
 
     res.json(product);
   } catch (error) {
-    res.status(500).json({ message: "Error al buscar producto", error });
+    // si explota findById porque no es un ObjectId
+    const product = await Product.findOne({ id: Number(id) });
+    if (product) return res.json(product);
+    return res.status(404).json({ message: "Producto no encontrado" });
   }
 };
 
