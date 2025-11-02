@@ -17,6 +17,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // Conexión a MongoDB
+/*
 await mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Conexión exitosa a MongoDB"))
   .catch((err) => console.error("Error al conectar a MongoDB:", err));
@@ -28,6 +29,11 @@ app.use(logger);
 
 const MONGO_URI = process.env.MONGO_URI;
 console.log("Base actual:", MONGO_URI);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+*/
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -67,8 +73,23 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "Error interno del servidor" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const startServer = async () => {
+  try {
+    console.log("Intentando conectar a MongoDB...");
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 10000,
+    });
+    console.log("✅ Conexión exitosa a MongoDB");
+    console.log("Base actual:", mongoose.connection.name);
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("❌ Error al conectar a MongoDB:", error);
+  }
+};
+
+startServer();
 
 export default app;
