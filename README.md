@@ -39,13 +39,19 @@ Este proyecto es una tienda online de muebles que permite ver productos, detalle
 
 ## Tecnologías utilizadas
 
-- **HTML5**: Estructura de las páginas.
-- **CSS3**: Estilos y diseño responsivo con media queries.
-- **JavaScript (ES6+)**: Lógica de búsqueda, render dinámico del catálogo, carrito de compras y menú responsive.
-- **React**: Arquitectura de componentes, estado, props y eventos.
-- **Node.js + Express**: Backend para servir datos de productos.
-- **LocalStorage**: Persistencia del carrito en el navegador.
-- **Google Fonts** (Teko, Exo 2): Tipografías.
+### **Frontend**
+- **HTML5**  
+- **CSS3** (diseño responsivo con media queries)  
+- **JavaScript** (ES6+)  
+- **React** 
+- **LocalStorage** (persistencia del carrito)  
+- **Google Fonts** (Teko, Exo 2)
+
+### **Backend**
+- **Node.js + Express**  
+- **Mongoose** (para conectarse a MongoDB Atlas)  
+- **dotenv** (para manejar variables de entorno)  
+- **CORS y Morgan** (para depuración y comunicación entre frontend/backend)
 
 /*----------------------------------------------------------*/
 ## Instalación y ejecución
@@ -79,21 +85,20 @@ npm start
 
 ## Funcionalidades
 
-Listado de productos
+Listado de productos desde MongoDB
 
 Detalle de productos
 
-Carrito de compras (contador y almacenamiento en localStorage)
+Carrito de compras con contador y almacenamiento en localStorage
 
 Navegación entre Home, Productos y Contacto
 
 Interfaz responsiva con menú
-
 /*----------------------------------------------------------*/
 ## Notas
 
-Actualmente la aplicación no usa base de datos, los productos se cargan desde un archivo local (productos.js).
+El backend ahora se conecta a una base de datos MongoDB Atlas mediante Mongoose.
 
-La navegación entre páginas se hace mediante un sistema propio de navigate y renderizado condicional.
+Las variables sensibles (como la URI de conexión) deben guardarse en el archivo .env o configurarse en Vercel para producción.
 
-El carrito se guarda en localStorage, por lo que persiste al recargar la página.
+La app mantiene el carrito usando localStorage, por lo que persiste tras recargar la página.
