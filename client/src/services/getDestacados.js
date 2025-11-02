@@ -1,9 +1,8 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
-
+const API_URL = "https://muebleria-hermanos-jota-react-expre-iota.vercel.app/api";
 
 export const getDestacados = async () => {
   try {
-    const response = await fetch(`${API_URL}/api/products/destacados`);
+    const response = await fetch(`${API_URL}/products/destacados`);
     const data = await response.json();
     return data;
   } catch (error) {
