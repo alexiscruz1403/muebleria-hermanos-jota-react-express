@@ -1,6 +1,6 @@
 import "./ProductDetailCard.css";
 import { useNavigate } from "react-router-dom";
-import { deleteProduct } from "../../services/deleteProduct";
+import { deleteProduct } from "../../services/productService";
 
 export const ProductDetailCard = ({ product, onAddToCart }) => {
     const navigate = useNavigate();

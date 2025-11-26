@@ -1,57 +1,86 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/auth/AuthContext";
+import { NavLink } from "../NavLink";
+import { NavIcons } from "../NavIcons";
+import { Menu } from "lucide-react"
 import logo from "../../assets/logo.svg";
-import "./NavBar.css";
 
 const Navbar = ({ cartCount }) => {
     const[menuActivate,setMenuActivate]=useState(false);
+
+    const { isAuthenticated, onLogoutSuccess } = useContext(AuthContext);
     const navigate = useNavigate();
     
     const toggleMenu=()=>{
         setMenuActivate(!menuActivate);
     }
 
+    const handleLogout = () => {
+        const confirm = window.confirm("¿Estás seguro que deseas cerrar sesión?");
+        if (confirm) {
+            onLogoutSuccess();
+            navigate("/");
+        }
+    }
+
   return (
-    <header id="BarraDeNavegacion">
-      <nav id="Navegador">
+    <header className="sticky top-0 z-10 bg-[#F5E6D3]">
+      <nav className="flex justify-between items-center p-2 md:p-4">
         {/* Logo */}
-        <div className="LogoYNombre">
-          <a href="/">
-            <img src={logo} alt="Mueblería Jota" />
-          </a>
-          <h1 className="Content">Hermanos Jota</h1>
+        <div className="flex items-center gap-2 cursor-pointer">
+          <Link to="/">
+            <img src={logo} alt="Logo" className="h-10"/>
+          </Link>
+          <h1 className="text-[#A0522D] text-center font-['Playfair Display'] tracking-widest">HERMANOS JOTA</h1>
         </div>
 
         <button
-          className="MenuToggle"
+          className="md:hidden p-2 rounded-md text-[#C47A6D]"
           onClick={toggleMenu}
           aria-label="Abrir menú"
         >
-          ☰
+          <Menu size={30}/>
         </button>
 
-        <ul className={`ListaNav ${menuActivate ? "active" : ""}`}>
-          <li className="Links">
-            <button onClick={() => navigate('/')}>Home</button>
-          </li>
-          <li className="Links">
-            <button onClick={() => navigate('/products')}>Productos</button>
-          </li>
-          <li className="Links">
-            <button onClick={() => navigate('/contact')}>Contacto</button>
-          </li>
-          <li className="Links">
-            <button onClick={() => navigate('/admin/crear-producto')}>Crear producto</button>
-          </li>
+        <ul className={`bg-[#C47A6D] md:bg-transparent absolute md:relative top-12 md:top-0 right-0 p-2 ${menuActivate ? "flex flex-col gap-1 rounded-md shadow-md" : "hidden md:flex gap-2"}`} onClick={toggleMenu}>
+          <NavLink to="/" label="Inicio" />
+          <NavLink to="/products" label="Productos" />
+          <NavLink to="/contact" label="Contacto" />
+          {isAuthenticated && (
+            <>
+              <NavLink to="/products" label="Mi carrito" onlyOnMobile />
+              <NavLink to="/products" label="Mi perfil" onlyOnMobile />
+              <NavLink to="/admin/crear-producto" label="Crear producto" />
+              <button className="md:hidden w-full text-left px-3 text-[#F5E6D3] py-2 hover:bg-[#A85F52] transition-colors font-semibold" onClick={handleLogout}>
+                Cerrar sesión
+              </button>
+            </>
+          )}
+          {!isAuthenticated && (
+            <>
+              <NavLink to="/login" label="Iniciar sesión" onlyOnMobile />
+              <NavLink to="/registro" label="Registrarse" onlyOnMobile />
+            </>
+          )}
+        </ul>
 
-          <li className="Links carrito">
-            <button onClick={() => navigate('/cart')}>
-              <div>🛒 Carrito</div>
-              <div id="counter-container">
-                <span id="counter">{cartCount}</span>
+        <ul className="hidden md:flex items-center">
+          {isAuthenticated ? 
+            (
+              <NavIcons />
+            ) : 
+            (
+              <div className="flex flex-col md:flex-row gap-2 items-center justify-center">
+                  <Link to="/login" className="px-5 py-2 bg-[#A0522D] text-[#F5E6D3] rounded-md hover:bg-[#8B3E20] hover:text-gray-100 transition-colors duration-300 shadow-sm">
+                    Iniciar sesion
+                  </Link>
+                  <Link to="/registro" className="px-5 py-2 bg-[#87A96B] text-[#F5E6D3] rounded-md hover:bg-[#6F8C56] hover:text-gray-100 transition-colors duration-300 shadow-md">
+                    Registrarse
+                  </Link>
               </div>
-            </button>
-          </li>
+            )
+          }
         </ul>
       </nav>
     </header>

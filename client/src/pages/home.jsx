@@ -2,7 +2,7 @@ import "../css/Home.css";
 import { useState, useEffect } from "react";
 import { Header } from "../components/Header/Header";
 import { ProductList } from "../components/ProductList/ProductList";
-import { getDestacados } from "../services/getDestacados";
+import { getDestacados } from "../services/productService";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
