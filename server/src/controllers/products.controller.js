@@ -1,9 +1,7 @@
-import mongoose from "mongoose";
-import { Product } from "../models/ProductsModel.js";
+import { Product } from "../models/Product.model.js";
 
 export const getProducts = async (req, res) => {
   try {
-    console.log("Buscando productos en MongoDB...");
     const search = req.query.search;
     let products;
     if (search) {
@@ -16,8 +14,6 @@ export const getProducts = async (req, res) => {
     } else {
       products = await Product.find();
     }
-
-    console.log("Productos encontrados:", products.length);
     res.json(products);
   } catch (error) {
     console.error("Error al obtener productos:", error);
@@ -27,8 +23,6 @@ export const getProducts = async (req, res) => {
 
 export const getDestacados = async (req, res) => {
   try {
-    console.log("🔹 Conexión a MongoDB:", mongoose.connection.readyState);
-
     const destacados = await Product.find().limit(5);
 
     console.log("Destacados encontrados:", destacados);

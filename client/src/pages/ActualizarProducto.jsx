@@ -2,9 +2,7 @@ import "../css/AdminForm.css";
 import { ProductForm } from "../components/ProductForm/ProductForm";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProduct } from "../services/getProduct";
-import { updateProduct } from "../services/updateProducts";
-import { createProductImage } from "../services/createProductImage";
+import { getProductById, updateProduct, createProductImage } from "../services/productService";
 import { SnackBar } from "../components/SnackBar/SnackBar";
 
 export const ActualizarProducto = () => {
@@ -18,7 +16,7 @@ export const ActualizarProducto = () => {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                const product = await getProduct(id);
+                const product = await getProductById(id);
                 const mappedSpecs = Object.keys(product.especificaciones).map(key => ({
                     label: key,
                     value: product.especificaciones[key],

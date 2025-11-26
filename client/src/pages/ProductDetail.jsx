@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProductDetailCard } from "../components/ProductDetailCard/ProductDetailCard";
-import { getProduct } from "../services/getProduct";
+import { getProductById } from "../services/productService";
 
 export const ProductDetail = ({ onAddToCart }) => {
   const { id } = useParams(); // 👈 importante: debe coincidir con la ruta "/products/:id"
@@ -12,7 +12,7 @@ export const ProductDetail = ({ onAddToCart }) => {
     const fetchProduct = async () => {
       try {
         if (!id) return; // evita fetch undefined
-        const data = await getProduct(id);
+        const data = await getProductById(id);
         setProduct(data);
       } catch (error) {
         console.error("Error al obtener producto:", error);

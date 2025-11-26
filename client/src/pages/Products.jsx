@@ -3,7 +3,7 @@ import { Container } from "../components/Container/Container"
 import { Title } from "../components/Title/Title"
 import { SearchBar } from "../components/SearchBar/SearchBar"
 import { ProductList } from "../components/ProductList/ProductList"
-import { getProducts } from "../services/getProducts"
+import { getAllProducts } from "../services/productService"
 
 export const Products = ({navigate}) => {
     const [products, setProducts] = useState([]);
@@ -12,7 +12,7 @@ export const Products = ({navigate}) => {
     const fetchProducts = async (searchTerm) => {
         try{
             setLoading(true);
-            const data = await getProducts(searchTerm);
+            const data = await getAllProducts(searchTerm);
             setProducts(data);
             setLoading(false);
         }catch(error){

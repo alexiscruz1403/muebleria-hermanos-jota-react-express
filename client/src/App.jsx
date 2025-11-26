@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout';
 import Home from './pages/home';
@@ -9,6 +9,10 @@ import { Cart } from './pages/Cart';
 import { Contact } from './pages/Contact';
 import { CrearProducto } from './pages/CrearProducto';
 import { ActualizarProducto } from './pages/ActualizarProducto';
+import { Registro } from './pages/Registro';
+import { Login } from './pages/Login';
+import { AuthContext } from './contexts/auth/AuthContext';
+import { useContext } from 'react';
 
 function App() {
   const navigate = useNavigate();
@@ -25,10 +29,20 @@ function App() {
     setCartProducts(cartProducts.filter(p => p.id !== productId));
   }
 
+  const { isAuthenticated, decodeToken } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      decodeToken();
+    }
+  }, [isAuthenticated]);
+
   return (
     <Layout cartCount={cartProducts.length}>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/registro' element={<Registro />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/products' element={<Products />} />
         <Route path='/products/:id' element={<ProductDetail onAddToCart={addToCart} />} />
         <Route path='/cart' element={<Cart products={cartProducts} onRemove={removeFromCart} />} />

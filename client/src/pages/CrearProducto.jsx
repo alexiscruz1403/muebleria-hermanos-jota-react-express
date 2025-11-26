@@ -2,8 +2,7 @@ import "../css/AdminForm.css";
 import { useState } from "react";
 import { ProductForm } from "../components/ProductForm/ProductForm";
 import { useNavigate } from "react-router-dom";
-import { createProduct } from "../services/createProduct";
-import { createProductImage } from "../services/createProductImage";
+import { createProduct, createProductImage } from "../services/productService";
 import { SnackBar } from "../components/SnackBar/SnackBar";
 
 export const CrearProducto = () => {
