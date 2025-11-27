@@ -43,7 +43,7 @@ const Navbar = ({ cartCount }) => {
           <Menu size={30}/>
         </button>
 
-        <ul className={`bg-[#C47A6D] md:bg-transparent absolute md:relative top-12 md:top-0 right-0 p-2 ${menuActivate ? "flex flex-col gap-1 rounded-md shadow-md" : "hidden md:flex gap-2"}`} onClick={toggleMenu}>
+        <ul className={`bg-[#C47A6D] md:bg-transparent absolute md:relative top-12 md:top-0 right-0 p-2 ${menuActivate ? "flex gap-2 rounded-md shadow-md" : "hidden md:flex gap-2"}`} onClick={toggleMenu}>
           <NavLink to="/" label="Inicio" />
           <NavLink to="/products" label="Productos" />
           <NavLink to="/contact" label="Contacto" />
@@ -68,7 +68,7 @@ const Navbar = ({ cartCount }) => {
         <ul className="hidden md:flex items-center">
           {isAuthenticated ? 
             (
-              <NavIcons />
+              <NavIcons cartCount={cartCount}/>
             ) : 
             (
               <div className="flex flex-col md:flex-row gap-2 items-center justify-center">
