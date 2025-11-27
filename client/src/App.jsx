@@ -13,6 +13,7 @@ import { Registro } from './pages/Registro';
 import { Login } from './pages/Login';
 import { AuthContext } from './contexts/auth/AuthContext';
 import { useContext } from 'react';
+import { MiPerfil } from "./pages/MiPerfil";
 
 function App() {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/admin/crear-producto' element={<CrearProducto />} />
         <Route path='/admin/actualizar-producto/:id' element={<ActualizarProducto />} />
+        <Route path='/mi_perfil' element={<MiPerfil />} />
       </Routes>
     </Layout>
   );

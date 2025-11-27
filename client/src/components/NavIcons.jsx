@@ -19,6 +19,9 @@ export const NavIcons = ({ cartCount }) => {
   const goToCart = () => {
     navigate("/cart");
   };
+  const goToProfile = () => {
+    navigate("/mi_perfil");
+  }
 
   return (
     <div className="hidden md:flex items-center gap-6">
@@ -50,7 +53,10 @@ export const NavIcons = ({ cartCount }) => {
             </div>
             <ul>
               <li>
-                <button className="w-full px-4 py-2 text-sm text-white text-left hover:bg-[#b86a5e] transition-colors duration-200">
+                <button
+                  className="w-full px-4 py-2 text-sm text-white text-left hover:bg-[#b86a5e] transition-colors duration-200"
+                  onClick={goToProfile}
+                >
                   Mi perfil
                 </button>
               </li>

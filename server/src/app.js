@@ -10,8 +10,10 @@ import dotenv from "dotenv";
 // Rutas
 import productsRouter from "./routes/products.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 dotenv.config(); // carga las variables del .env
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -39,12 +41,18 @@ app.use(logger);
 // API routes
 app.use("/api/products", productsRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRoutes);
+
+// Servir imágenes estáticas
+app.use("/uploads", express.static("public/uploads"));
 
 // Servir React build
 app.use(express.static(path.join(__dirname, "../../client/build")));
 
-// Servir imágenes estáticas
-app.use("/uploads", express.static("public/uploads"));
+// Fallback SOLO para rutas del front
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/build", "index.html"));
+});
 
 // 
 app.use((req, res, next) => {
