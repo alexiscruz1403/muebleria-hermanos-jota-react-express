@@ -16,6 +16,7 @@ import { useContext } from 'react';
 import { MiPerfil } from "./pages/MiPerfil";
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { AdminRoute } from './components/AdminRoute';
+import { MisPedidos } from './pages/misPedidos';
 
 function App() {
   const { isAuthenticated, decodeToken } = useContext(AuthContext);
@@ -39,6 +40,7 @@ function App() {
         <Route path='/admin/crear-producto' element={<AdminRoute> <CrearProducto /> </AdminRoute>} />
         <Route path='/admin/actualizar-producto/:id' element={<AdminRoute> <ActualizarProducto /> </AdminRoute>} />
         <Route path='/mi_perfil' element={<ProtectedRoute> <MiPerfil /> </ProtectedRoute>} />
+        <Route path='/mis_pedidos' element={<ProtectedRoute> <MisPedidos /> </ProtectedRoute>} />
       </Routes>
     </Layout>
   );

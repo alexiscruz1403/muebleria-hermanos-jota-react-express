@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authMiddleWare } from "../middlewares/auth.middleware.js";
+import { authMiddleWare } from "../middlewares/authMiddleware.middleware.js";
 import {
   getMisPedidos,
   crearPedido,

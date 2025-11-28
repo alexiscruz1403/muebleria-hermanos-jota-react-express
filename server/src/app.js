@@ -11,6 +11,7 @@ import dotenv from "dotenv";
 import productsRouter from "./routes/products.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import pedidoRoutes from "./routes/pedido.routes.js";
 
 dotenv.config(); // carga las variables del .env
 
@@ -42,6 +43,7 @@ app.use(logger);
 app.use("/api/products", productsRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRoutes);
+app.use("/api/pedidos", pedidoRoutes);
 
 // Servir imágenes estáticas
 app.use("/uploads", express.static("public/uploads"));

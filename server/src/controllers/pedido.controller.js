@@ -1,17 +1,31 @@
 import { Pedido } from "../models/Pedido.model.js";
 
-//Obtener pedidos del usuario
+//Obtener pedidos del cliente
 
 export const getMisPedidos = async (req, res) => {
   try {
-    const userId = req.user.id;
+    console.log("Entró a getMisPedidos");
+    console.log("Usuario autenticado:", req.user);
+
+    const userId = req.user?.id;
+
+    if (!userId) {
+      console.log("No hay userId en req.user");
+      return res.status(401).json({ message: "Usuario no autenticado" });
+    }
 
     const pedidos = await Pedido.find({ usuario: userId });
 
+    console.log("Pedidos encontrados:", pedidos);
+
     return res.json({ pedidos });
   } catch (error) {
-    return res.status(500).json({ message: "Error en el servidor", error });
+    console.error("ERROR en getMisPedidos:", error);
+    res
+      .status(500)
+      .json({ message: "Error al obtener pedidos", error: error.message });
   }
+
 };
 
 
