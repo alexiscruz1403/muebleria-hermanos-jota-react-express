@@ -14,7 +14,9 @@ export const getMisPedidos = async (req, res) => {
       return res.status(401).json({ message: "Usuario no autenticado" });
     }
 
-    const pedidos = await Pedido.find({ usuario: userId });
+    const pedidos = await Pedido.find({ usuario: userId }).populate(
+      "productos"
+    );;
 
     console.log("Pedidos encontrados:", pedidos);
 

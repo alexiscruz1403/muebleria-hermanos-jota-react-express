@@ -1,10 +1,12 @@
 import { ShoppingCart, User } from "lucide-react";
 import { useState, useContext } from "react";
+import { CartContext } from "../contexts/cart/cartContext";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth/AuthContext";
 
 export const NavIcons = ({ cartCount }) => {
   const [openMenu, setOpenMenu] = useState(false);
+  const { clearCart } = useContext(CartContext);
 
   const { user, onLogoutSuccess } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ export const NavIcons = ({ cartCount }) => {
   const handleLogout = () => {
     const confirm = window.confirm("¿Estás seguro que deseas cerrar sesión?");
     if (confirm) {
+      clearCart();
       onLogoutSuccess();
       navigate("/");
     }

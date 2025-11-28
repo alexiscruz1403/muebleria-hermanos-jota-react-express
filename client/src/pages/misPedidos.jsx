@@ -19,14 +19,13 @@ export const MisPedidos = () => {
         );
 
         const data = await response.json();
-        console.log("📩 data en front:", data);
+        console.log("data en front:", data);
 
         if (!response.ok) {
           alert(data.message || "Error al cargar pedidos");
           return;
         }
 
-        // ⬅️ CAMBIO IMPORTANTE
         setPedidos(Array.isArray(data.pedidos) ? data.pedidos : []);
       } catch (error) {
         console.error("Error cargando pedidos:", error);
@@ -42,7 +41,7 @@ export const MisPedidos = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Mis Pedidos</h2>
+      <h1>Mis Pedidos</h1>
 
       {pedidos.length === 0 ? (
         <p>No tenés pedidos realizados.</p>
@@ -59,7 +58,9 @@ export const MisPedidos = () => {
                 backgroundColor: "#fdf7f2",
               }}
             >
-              <h3>Pedido #{pedido._id}</h3>
+              <h2>
+                Pedido #{pedido._id}
+              </h2>
               <p>
                 <strong>Fecha:</strong>{" "}
                 {new Date(pedido.fecha).toLocaleString()}
@@ -71,11 +72,16 @@ export const MisPedidos = () => {
               <p>
                 <strong>Productos:</strong>
               </p>
-
+             
               <ul>
                 {(Array.isArray(pedido.productos) ? pedido.productos : []).map(
                   (prod) => (
-                    <li key={prod}>{prod}</li>
+                    <li key={prod._id} style={{ marginBottom: "12px" }}>
+                      <p>{prod.nombre}</p>
+                      <p>
+                        <strong>Precio:</strong> ${prod.precio}
+                      </p>
+                    </li>
                   )
                 )}
               </ul>
