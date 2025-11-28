@@ -5,7 +5,7 @@ import { CartContext } from "../../contexts/cart/cartContext";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { deleteProduct } from "../../services/productService";
 
-export const ProductDetailCard = ({ product }) => {
+export const ProductDetailCard = ({ product, onAddToCart }) => {
     const navigate = useNavigate();
     const { addToCart } = useContext(CartContext);
     const { user } = useContext(AuthContext);
@@ -22,6 +22,11 @@ export const ProductDetailCard = ({ product }) => {
                 console.error("Error deleting product:", error);
             }
         }
+    }
+
+    const handleAddToCart = () => {
+        addToCart(product);
+        onAddToCart();
     }
     
     return (
@@ -57,7 +62,7 @@ export const ProductDetailCard = ({ product }) => {
             {/* <!-- Precio y boton --> */}
             <section class="acciones">
                 <p class="precio" id="precio">${product.precio}</p>
-                <button id="btnAdd" onClick={() => addToCart(product)}>Añadir al carrito</button>
+                <button id="btnAdd" onClick={handleAddToCart}>Añadir al carrito</button>
             </section>
             </div>
         </article>
