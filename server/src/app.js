@@ -46,14 +46,6 @@ app.use("/api/user", userRoutes);
 // Servir imágenes estáticas
 app.use("/uploads", express.static("public/uploads"));
 
-// Servir React build
-app.use(express.static(path.join(__dirname, "../../client/build")));
-
-// Fallback SOLO para rutas del front
-app.get(/^(?!\/api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/build", "index.html"));
-});
-
 // 
 app.use((req, res, next) => {
   if (req.path.startsWith("/api")) return next();
