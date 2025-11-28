@@ -27,8 +27,15 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const updateUser = (token) => {
+        setToken(token);
+        localStorage.setItem("authToken", token);
+        const decoded = jwtDecode(token);
+        setUser(decoded);
+    };
+
     return (
-        <AuthContext.Provider value={{ user, token, setToken, isAuthenticated, decodeToken, onLoginSuccess, onLogoutSuccess }}>
+        <AuthContext.Provider value={{ user, token, setToken, isAuthenticated, decodeToken, onLoginSuccess, onLogoutSuccess, updateUser }}>
             {children}
         </AuthContext.Provider>
     );

@@ -1,9 +1,14 @@
 import "./ProductDetailCard.css";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../contexts/cart/cartContext";
+import { AuthContext } from "../../contexts/auth/AuthContext";
 import { deleteProduct } from "../../services/productService";
 
-export const ProductDetailCard = ({ product, onAddToCart }) => {
+export const ProductDetailCard = ({ product }) => {
     const navigate = useNavigate();
+    const { addToCart } = useContext(CartContext);
+    const { user } = useContext(AuthContext);
 
     const handleDelete = async () => {
         const confirm = window.confirm("¿Estás seguro de que deseas eliminar este producto?");
@@ -40,15 +45,17 @@ export const ProductDetailCard = ({ product, onAddToCart }) => {
                         ))}
                     </tbody>
                 </table>
-                <div className="actions">
-                    <button type="button" className="edit-button" onClick={() => {navigate(`/admin/actualizar-producto/${product.id}`)}}>Editar</button>
-                    <button type="button" className="delete-button" onClick={handleDelete}>Eliminar</button>
-                </div>
+                {user && user.rol === "admin" &&(
+                    <div className="actions">
+                        <button type="button" className="edit-button" onClick={() => {navigate(`/admin/actualizar-producto/${product.id}`)}}>Editar</button>
+                        <button type="button" className="delete-button" onClick={handleDelete}>Eliminar</button>
+                    </div>
+                )}
             </section>
             {/* <!-- Precio y boton --> */}
             <section class="acciones">
                 <p class="precio" id="precio">${product.precio}</p>
-                <button id="btnAdd" onClick={() => onAddToCart(product)}>Añadir al carrito</button>
+                <button id="btnAdd" onClick={() => addToCart(product)}>Añadir al carrito</button>
             </section>
             </div>
         </article>

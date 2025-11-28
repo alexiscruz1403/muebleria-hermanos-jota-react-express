@@ -1,7 +1,10 @@
 import "./CartFooter.css";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/cart/cartContext";
 
-export const CartFooter = ({ products }) => {
-    const totalAmount = products.reduce((acc, product) => acc + product.precio, 0).toFixed(2);
+export const CartFooter = () => {
+    const { cart } = useContext(CartContext);
+    const totalAmount = cart.reduce((acc, product) => acc + product.precio, 0).toFixed(2);
 
     return (
         <div id="carrito-total">

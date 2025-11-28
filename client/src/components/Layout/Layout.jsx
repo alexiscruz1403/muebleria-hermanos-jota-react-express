@@ -1,10 +1,10 @@
 import NavBar from '../Navbar/NavBar' ;
 import Footer from "../Footer/Footer";
 
-export const Layout = ({ children, cartCount }) => {
+export const Layout = ({ children }) => {
     return(
         <div className="layout">
-            <NavBar cartCount={cartCount} />
+            <NavBar />
             <main>{children}</main>
             <Footer />
         </div>

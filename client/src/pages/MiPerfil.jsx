@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/auth/AuthContext";
 
 export const MiPerfil = () => {
-  const { user, token, decodeToken } = useContext(AuthContext);
+  const { user, token, decodeToken, updateUser } = useContext(AuthContext);
 
   const [nombre, setNombre] = useState(user?.nombre || "");
   const [actualPassword, setActualPassword] = useState("");
@@ -45,7 +45,7 @@ export const MiPerfil = () => {
       setMensaje("Perfil actualizado con éxito");
 
       // 🔄 Refresca datos en AuthContext (actualiza user)
-      decodeToken();
+      updateUser(data.token);
 
       // Limpia las contraseñas luego del cambio
       setActualPassword("");
