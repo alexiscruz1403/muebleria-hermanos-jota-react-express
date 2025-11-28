@@ -10,6 +10,8 @@ export const ProductDetailCard = ({ product }) => {
     const { addToCart } = useContext(CartContext);
     const { user } = useContext(AuthContext);
 
+    const BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
+
     const handleDelete = async () => {
         const confirm = window.confirm("¿Estás seguro de que deseas eliminar este producto?");
         if(confirm){
@@ -27,7 +29,7 @@ export const ProductDetailCard = ({ product }) => {
             <div class="detail-container">    
             {/* <!-- Imagen del producto --> */}
             <figure class="media">
-                <img id="imagenProducto" src={`http://localhost:4000${product.img.src}`} alt={product.img.alt} />
+                <img id="imagenProducto" src={`${BASE_URL}${product.img.src}`} alt={product.img.alt} />
             </figure>
             {/* <!-- Información del producto --> */}
             <section class=" infoProducto">
