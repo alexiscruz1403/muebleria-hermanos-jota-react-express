@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const BASE_URL = "https://muebleria-hermanos-jota-react-express.onrender.com/api";
+
 const api = axios.create({
-    baseURL: "http://localhost:4000/api",
+    baseURL: BASE_URL,
     headers: {
         "Content-Type": "application/json",
     },

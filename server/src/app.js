@@ -46,12 +46,6 @@ app.use("/api/user", userRoutes);
 // Servir imágenes estáticas
 app.use("/uploads", express.static("public/uploads"));
 
-// 
-app.use((req, res, next) => {
-  if (req.path.startsWith("/api")) return next();
-  res.sendFile(path.join(__dirname, "../../client/build", "index.html"));
-});
-
 // Manejo de errores 404 y 500
 app.use((req, res) => {
   res.status(404).json({ message: "Recurso no encontrado" });
