@@ -1,5 +1,6 @@
 import { Usuario } from "../models/Usuario.model.js";
 import bcrypt from "bcryptjs";
+import { generateToken } from "../../utils/jwt.util.js";
 
 export const updateProfile = async (req, res) => {
   try {
@@ -45,12 +46,15 @@ export const updateProfile = async (req, res) => {
       new: true,
     });
 
+    const token = generateToken(updatedUser);
+
     return res.json({
       message: "Perfil actualizado con éxito",
       user: {
         nombre: updatedUser.nombre,
         email: updatedUser.email,
       },
+      token,
     });
   } catch (error) {
     return res.status(500).json({ message: "Error en el servidor", error });

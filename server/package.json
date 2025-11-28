@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "nodemon src/app.js",
-    "start": "node api/index.js",
+    "start": "node src/app.js",
     "build": "echo 'No build step required for serverless functions'",
     "vercel-build": "echo 'No build step required for serverless functions'"
   },

@@ -1,15 +1,19 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth/AuthContext";
+import { CartContext } from "../../contexts/cart/cartContext";
 import { NavLink } from "../NavLink";
 import { NavIcons } from "../NavIcons";
 import { Menu } from "lucide-react"
 import logo from "../../assets/logo.svg";
 
-const Navbar = ({ cartCount }) => {
+const Navbar = () => {
     const[menuActivate,setMenuActivate]=useState(false);
+    const { cart } = useContext(CartContext);
+    const cartCount = cart.length;
 
-    const { isAuthenticated, onLogoutSuccess } = useContext(AuthContext);
+    const { isAuthenticated, onLogoutSuccess, user } = useContext(AuthContext);
+    console.log("Navbar user:", user);
     const navigate = useNavigate();
     
     const toggleMenu=()=>{
@@ -43,15 +47,17 @@ const Navbar = ({ cartCount }) => {
           <Menu size={30}/>
         </button>
 
-        <ul className={`bg-[#C47A6D] md:bg-transparent absolute md:relative top-12 md:top-0 right-0 p-2 ${menuActivate ? "flex gap-2 rounded-md shadow-md" : "hidden md:flex gap-2"}`} onClick={toggleMenu}>
+        <ul className={`bg-[#C47A6D] md:bg-transparent absolute md:relative top-12 md:top-0 right-0 p-2 ${menuActivate ? "flex flex-col md:flex-row gap-2 rounded-md shadow-md md:rounded-none md: shadow-none" : "hidden md:flex gap-2"}`} onClick={toggleMenu}>
           <NavLink to="/" label="Inicio" />
           <NavLink to="/products" label="Productos" />
           <NavLink to="/contact" label="Contacto" />
           {isAuthenticated && (
             <>
               <NavLink to="/products" label="Mi carrito" onlyOnMobile />
-              <NavLink to="/products" label="Mi perfil" onlyOnMobile />
-              <NavLink to="/admin/crear-producto" label="Crear producto" />
+              <NavLink to="/mi_perfil" label="Mi perfil" onlyOnMobile />
+              {user && user.rol === "admin" && (
+                <NavLink to="/admin/crear-producto" label="Crear producto" />
+              )}
               <button className="md:hidden w-full text-left px-3 text-[#F5E6D3] py-2 hover:bg-[#A85F52] transition-colors font-semibold" onClick={handleLogout}>
                 Cerrar sesión
               </button>

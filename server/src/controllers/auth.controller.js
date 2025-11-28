@@ -16,12 +16,13 @@ export const register = async (req, res) => {
             nombre,
             email,
             contrasenia: hashedPassword,
+            rol: "cliente"
         });
         await newUser.save();
 
         const token = generateToken(newUser);
 
-        res.status(201).json({ message: "Usuario registrado exitosamente", user: { nombre: newUser.nombre, email: newUser.email }, token });
+        res.status(201).json({ message: "Usuario registrado exitosamente", user: { nombre: newUser.nombre, email: newUser.email, rol: newUser.rol }, token });
     }catch (error) {
         res.status(500).json({ message: "Error al registrar usuario", error });
     }

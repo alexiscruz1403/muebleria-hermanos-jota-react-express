@@ -54,7 +54,7 @@ export const ActualizarProducto = () => {
 
     return(
         <div className="admin-form-container">
-            <h2>Actualizar Producto</h2>
+            <h2 className="font-bold text-2xl">Actualizar Producto</h2>
             {productData &&
                 <ProductForm onSubmit={handleSubmit} defaultValues={productData}/>
             }
