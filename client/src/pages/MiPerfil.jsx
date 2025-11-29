@@ -26,7 +26,8 @@ export const MiPerfil = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:4000/api/user/mi_perfil", {
+      const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000/api";
+      const res = await fetch(`${BASE_URL}/user/mi_perfil`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

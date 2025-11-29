@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById, updateProduct, createProductImage } from "../services/productService";
 import { SnackBar } from "../components/SnackBar/SnackBar";
+import { LoaderModal } from "../components/LoaderModal";
 
 export const ActualizarProducto = () => {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ export const ActualizarProducto = () => {
     const [snackbarType, setSnackbarType] = useState("success");
     const [snackbarMessage, setSnackbarMessage] = useState("");
     const [showSnackbar, setShowSnackbar] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,6 +34,7 @@ export const ActualizarProducto = () => {
 
     const handleSubmit = async (updatedProduct) => {
         try{
+            setLoading(true);
             await updateProduct(productData.id, updatedProduct);
             if(updatedProduct.imgFile){
                 await createProductImage(productData.id, updatedProduct.imgFile);
@@ -49,6 +52,8 @@ export const ActualizarProducto = () => {
             setShowSnackbar(true);
             setTimeout(() => setShowSnackbar(false), 3000);
             return;
+        }finally{
+            setLoading(false);
         }
     }
 
@@ -61,6 +66,7 @@ export const ActualizarProducto = () => {
             {showSnackbar && (
                 <SnackBar message={snackbarMessage} type={snackbarType} />
             )}
+            {loading && <LoaderModal />}
         </div>
     );
 }

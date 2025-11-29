@@ -12,6 +12,8 @@ export const ProductForm = ({ defaultValues = {}, onSubmit }) => {
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
 
+    const BASE_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:4000";
+
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
         setPreview(URL.createObjectURL(e.target.files[0]));
@@ -65,7 +67,7 @@ export const ProductForm = ({ defaultValues = {}, onSubmit }) => {
         <form action="" onSubmit={handleSubmit} className="product-form">
             {(defaultValues.img && defaultValues.img.src && !file) && (
                 <div className="product-image">
-                    <img src={`http://localhost:4000${defaultValues.img.src}`} alt={defaultValues.img.alt || "Imagen del producto"} />
+                    <img src={`${BASE_URL}/${defaultValues.img.src}`} alt={defaultValues.img.alt || "Imagen del producto"} />
                 </div>
             )}
 

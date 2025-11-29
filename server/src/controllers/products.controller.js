@@ -25,8 +25,6 @@ export const getDestacados = async (req, res) => {
   try {
     const destacados = await Product.find().limit(5);
 
-    console.log("Destacados encontrados:", destacados);
-
     res.json(destacados);
   } catch (error) {
     console.error("Error al obtener destacados:", error);
