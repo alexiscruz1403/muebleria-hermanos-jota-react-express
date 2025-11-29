@@ -25,8 +25,9 @@ export const CartFooter = () => {
         }
 
         try {
+          const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000/api";
           const response = await fetch(
-            "http://localhost:4000/api/pedidos/crear_pedido",
+            `${BASE_URL}/pedidos/crear_pedido`,
             {
               method: "POST",
               headers: {

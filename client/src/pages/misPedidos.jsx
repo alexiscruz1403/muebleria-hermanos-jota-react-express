@@ -9,8 +9,9 @@ export const MisPedidos = () => {
   useEffect(() => {
     const fetchPedidos = async () => {
       try {
+        const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000/api";
         const response = await fetch(
-          "http://localhost:4000/api/pedidos/mis_pedidos",
+          `${BASE_URL}/pedidos/mis_pedidos`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -72,7 +73,7 @@ export const MisPedidos = () => {
               <p>
                 <strong>Productos:</strong>
               </p>
-             
+
               <ul>
                 {(Array.isArray(pedido.productos) ? pedido.productos : []).map(
                   (prod) => (
@@ -85,6 +86,10 @@ export const MisPedidos = () => {
                   )
                 )}
               </ul>
+
+              <p>
+                <strong>Total:</strong> ${pedido.total}
+              </p>
             </li>
           ))}
         </ul>

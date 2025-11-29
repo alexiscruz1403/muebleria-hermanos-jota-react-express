@@ -13,7 +13,6 @@ export const Cart = () => {
                 <h2 id="empty-message">El carrito está vacío</h2>
             ) : (
                 <div id="carrito-container">
-                    
                     <CartList />
                     <CartFooter />
                 </div>

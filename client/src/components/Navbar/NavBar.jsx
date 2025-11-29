@@ -13,7 +13,6 @@ const Navbar = () => {
     const cartCount = cart.length;
 
     const { isAuthenticated, onLogoutSuccess, user } = useContext(AuthContext);
-    console.log("Navbar user:", user);
     const navigate = useNavigate();
     
     const toggleMenu=()=>{
@@ -62,7 +61,7 @@ const Navbar = () => {
           <NavLink to="/contact" label="Contacto" />
           {isAuthenticated && (
             <>
-              <NavLink to="/products" label="Mi carrito" onlyOnMobile />
+              <NavLink to="/cart" label="Mi carrito" onlyOnMobile />
               <NavLink to="/mis_pedidos" label="Mis pedidos" onlyOnMobile />
               <NavLink to="/mi_perfil" label="Mi perfil" onlyOnMobile />
 
